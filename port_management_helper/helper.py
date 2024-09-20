@@ -548,6 +548,7 @@ def calc_cross_section_regression(
         annual_factor=annual_factor, intercept=intercept_cross_section,
         return_model=return_model, warnings=False
     )
+
     if return_model:
         return cross_section_regression
     cross_section_regression = cross_section_regression.rename(columns=lambda c: c.replace(' Beta Beta', ' Lambda').replace('Alpha', 'Eta'))
@@ -565,6 +566,7 @@ def calc_cross_section_regression(
             .rename(columns=lambda c: c.replace(' Lambda', ' Annualized Lambda'))
         )
         cross_section_regression = cross_section_regression.join(factors_annualized_premium)
+
     if return_historical_premium:
         print('Lambda represents the premium calculated by the cross-section regression and the historical premium is the average of the factor excess returns')
         factors_historical_premium = factors.mean().to_frame(f'{name} Cross-Section Regression').transpose().rename(columns=lambda c: c + ' Historical Premium')
@@ -576,6 +578,7 @@ def calc_cross_section_regression(
                 .rename(columns=lambda c: c.replace(' Historical Premium', ' Annualized Historical Premium'))
             )
             cross_section_regression = cross_section_regression.join(factors_annualized_historical_premium)
+
     if compare_premiums:
         cross_section_regression = cross_section_regression.filter(regex='Lambda$|Historical Premium$', axis=1)
         cross_section_regression = cross_section_regression.transpose()
@@ -594,6 +597,7 @@ def calc_cross_section_regression(
             drop_indexes=drop_indexes,
             drop_before_keep=drop_before_keep
         )
+    
     if return_mae:
         cross_section_regression['TS MAE'] = time_series_regressions['Alpha'].abs().mean()
         cross_section_regression['TS Annualized MAE'] = time_series_regressions['Annualized Alpha'].abs().mean()
@@ -604,6 +608,7 @@ def calc_cross_section_regression(
         )
         cross_section_regression['CS MAE'] = cross_section_regression_model.resid.abs().mean()
         cross_section_regression['CS Annualized MAE'] = cross_section_regression['CS MAE'] * annual_factor
+
     return filter_columns_and_indexes(
         cross_section_regression,
         keep_columns=keep_columns,
@@ -1226,6 +1231,7 @@ def calc_strategy_oos(
     Returns:
     pd.DataFrame: Time series of strategy returns.
     """
+    raise Exception("Function not available - needs testing prior to use")
     try:
         y = y.copy()
         X = X.copy()
@@ -1355,6 +1361,7 @@ def calc_replication_oos(
     Returns:
     pd.DataFrame: Summary statistics for the out-of-sample replication.
     """
+    raise Exception("Function not available - needs testing prior to use")
     try:
         y = y.copy()
         X = X.copy()
@@ -1474,6 +1481,7 @@ def calc_replication_oos_not_lagged_features(
     Returns:
     pd.DataFrame: Summary statistics for the out-of-sample replication.
     """
+    raise Exception("Function not available - needs testing prior to use")
     try:
         y = y.copy()
         X = X.copy()
@@ -1574,10 +1582,21 @@ def calc_replication_oos_not_lagged_features(
 
 
 def create_portfolio(
-        returns: pd.DataFrame,
-        weights: Union[dict, list],
-        port_name: Union[None, str] = None
-    ):
+    returns: pd.DataFrame,
+    weights: Union[dict, list],
+    port_name: Union[None, str] = None
+):
+    """
+    Creates a portfolio by applying the specified weights to the asset returns.
+
+    Parameters:
+    returns (pd.DataFrame): Time series of asset returns.
+    weights (dict or list): Weights to apply to the returns. If a list is provided, it will be converted into a dictionary.
+    port_name (str or None, default=None): Name for the portfolio. If None, a name will be generated based on asset weights.
+
+    Returns:
+    pd.DataFrame: The portfolio returns based on the provided weights.
+    """
     if 'date' in returns.columns.str.lower():
         returns = returns.rename({'Date': 'date'}, axis=1)
         returns = returns.set_index('date')
@@ -1597,21 +1616,43 @@ def create_portfolio(
 
 
 def calc_var_cvar_summary(
-        returns: Union[pd.Series, pd.DataFrame],
-        quantile: Union[None, float] = .05,
-        window: Union[None, str] = None,
-        return_hit_ratio: bool = False,
-        return_stats: Union[str, list] = ['Returns', 'VaR', 'CVaR', 'Vol'],
-        full_time_sample: bool = False,
-        z_score: float = None,
-        shift: int = 1,
-        normal_vol_formula: bool = False,
-        keep_columns: Union[list, str] = None,
-        drop_columns: Union[list, str] = None,
-        keep_indexes: Union[list, str] = None,
-        drop_indexes: Union[list, str] = None,
-        drop_before_keep: bool = False
-    ):
+    returns: Union[pd.Series, pd.DataFrame],
+    quantile: Union[None, float] = .05,
+    window: Union[None, str] = None,
+    return_hit_ratio: bool = False,
+    return_stats: Union[str, list] = ['Returns', 'VaR', 'CVaR', 'Vol'],
+    full_time_sample: bool = False,
+    z_score: float = None,
+    shift: int = 1,
+    normal_vol_formula: bool = False,
+    keep_columns: Union[list, str] = None,
+    drop_columns: Union[list, str] = None,
+    keep_indexes: Union[list, str] = None,
+    drop_indexes: Union[list, str] = None,
+    drop_before_keep: bool = False
+):
+    """
+    Calculates a summary of VaR (Value at Risk) and CVaR (Conditional VaR) for the provided returns.
+
+    Parameters:
+    returns (pd.Series or pd.DataFrame): Time series of returns.
+    quantile (float or None, default=0.05): Quantile to calculate the VaR and CVaR.
+    window (str or None, default=None): Window size for rolling calculations.
+    return_hit_ratio (bool, default=False): If True, returns the hit ratio for the VaR.
+    return_stats (str or list, default=['Returns', 'VaR', 'CVaR', 'Vol']): Statistics to return in the summary.
+    full_time_sample (bool, default=False): If True, calculates using the full time sample.
+    z_score (float, default=None): Z-score for parametric VaR calculation.
+    shift (int, default=1): Period shift for VaR/CVaR calculations.
+    normal_vol_formula (bool, default=False): If True, uses the normal volatility formula.
+    keep_columns (list or str, default=None): Columns to keep in the resulting DataFrame.
+    drop_columns (list or str, default=None): Columns to drop from the resulting DataFrame.
+    keep_indexes (list or str, default=None): Indexes to keep in the resulting DataFrame.
+    drop_indexes (list or str, default=None): Indexes to drop from the resulting DataFrame.
+    drop_before_keep (bool, default=False): If True, drops specified columns/indexes before keeping.
+
+    Returns:
+    pd.DataFrame: Summary of VaR and CVaR statistics.
+    """
     if window is None:
         print('Using "window" of 60 periods, since none was specified')
         window = 60
@@ -1700,18 +1741,38 @@ def calc_var_cvar_summary(
 
 
 def calc_rolling_oos_port(
-        returns: pd.DataFrame,
-        weights_func,
-        window: Union[None, int] = None,
-        weights_func_params: dict = {},
-        port_name: str = 'Portfolio OOS',
-        expanding: bool = False,
-        keep_columns: Union[list, str] = None,
-        drop_columns: Union[list, str] = None,
-        keep_indexes: Union[list, str] = None,
-        drop_indexes: Union[list, str] = None,
-        drop_before_keep: bool = False
-    ):
+    returns: pd.DataFrame,
+    weights_func,
+    window: Union[None, int] = None,
+    weights_func_params: dict = {},
+    port_name: str = 'Portfolio OOS',
+    expanding: bool = False,
+    keep_columns: Union[list, str] = None,
+    drop_columns: Union[list, str] = None,
+    keep_indexes: Union[list, str] = None,
+    drop_indexes: Union[list, str] = None,
+    drop_before_keep: bool = False
+):
+    """
+    Calculates a rolling out-of-sample portfolio based on a rolling or expanding window optimization.
+
+    Parameters:
+    returns (pd.DataFrame): Time series of asset returns.
+    weights_func (function): Function to calculate the portfolio weights.
+    window (int or None, default=None): Rolling window size for in-sample optimization.
+    weights_func_params (dict, default={}): Additional parameters for the weights function.
+    port_name (str, default='Portfolio OOS'): Name for the portfolio.
+    expanding (bool, default=False): If True, uses an expanding window instead of a rolling one.
+    keep_columns (list or str, default=None): Columns to keep in the resulting DataFrame.
+    drop_columns (list or str, default=None): Columns to drop from the resulting DataFrame.
+    keep_indexes (list or str, default=None): Indexes to keep in the resulting DataFrame.
+    drop_indexes (list or str, default=None): Indexes to drop from the resulting DataFrame.
+    drop_before_keep (bool, default=False): If True, drops specified columns/indexes before keeping.
+
+    Returns:
+    pd.DataFrame: Out-of-sample portfolio returns.
+    """
+    raise Exception("Function not available - needs testing prior to use")
     if window is None:
         print('Using "window" of 60 periods for in-sample optimization, since none were provided.')
         window = 60
@@ -1759,8 +1820,31 @@ def calc_fx_exc_ret(
     drop_columns: Union[list, str] = None,
     keep_indexes: Union[list, str] = None,
     drop_indexes: Union[list, str] = None,
-    drop_before_keep: bool = False,
+    drop_before_keep: bool = False
 ):
+    """
+    Calculates foreign exchange excess returns by subtracting risk-free rates from FX rates.
+
+    Parameters:
+    fx_rates (pd.DataFrame): Time series of FX rates.
+    rf_rates (pd.DataFrame): Time series of risk-free rates.
+    transform_to_log_fx_rates (bool, default=True): If True, converts FX rates to log returns.
+    transform_to_log_rf_rates (bool, default=True): If True, converts risk-free rates to log returns.
+    rf_to_fx (dict, default=None): Mapping of risk-free rates to FX pairs.
+    base_rf (str, default=None): Base risk-free rate to use for calculations.
+    base_rf_series (pd.Series or pd.DataFrame, default=None): Time series of the base risk-free rate.
+    annual_factor (int or None, default=None): Factor for annualizing the returns.
+    return_exc_ret (bool, default=False): If True, returns the excess returns instead of summary statistics.
+    keep_columns (list or str, default=None): Columns to keep in the resulting DataFrame.
+    drop_columns (list or str, default=None): Columns to drop from the resulting DataFrame.
+    keep_indexes (list or str, default=None): Indexes to keep in the resulting DataFrame.
+    drop_indexes (list or str, default=None): Indexes to drop from the resulting DataFrame.
+    drop_before_keep (bool, default=False): If True, drops specified columns/indexes before keeping.
+
+    Returns:
+    pd.DataFrame: Summary statistics or excess returns based on FX rates and risk-free rates.
+    """
+    raise Exception("Function not available - needs testing prior to use")
     fx_rates = fx_rates.copy()
     rf_rates = rf_rates.copy()
     if isinstance(base_rf_series, (pd.Series, pd.DataFrame)):
@@ -1826,8 +1910,31 @@ def calc_fx_regression(
     keep_indexes: Union[list, str] = None,
     drop_indexes: Union[list, str] = None,
     drop_before_keep: bool = False,
-    print_analysis: bool = True,
+    print_analysis: bool = True
 ):
+    """
+    Calculates FX regression and provides an analysis of how the risk-free rate differentials affect FX rates.
+
+    Parameters:
+    fx_rates (pd.DataFrame): Time series of FX rates.
+    rf_rates (pd.DataFrame): Time series of risk-free rates.
+    transform_to_log_fx_rates (bool, default=True): If True, converts FX rates to log returns.
+    transform_to_log_rf_rates (bool, default=True): If True, converts risk-free rates to log returns.
+    rf_to_fx (dict, default=None): Mapping of risk-free rates to FX pairs.
+    base_rf (str, default=None): Base risk-free rate to use for calculations.
+    base_rf_series (pd.Series or pd.DataFrame, default=None): Time series of the base risk-free rate.
+    annual_factor (int or None, default=None): Factor for annualizing returns.
+    keep_columns (list or str, default=None): Columns to keep in the resulting DataFrame.
+    drop_columns (list or str, default=None): Columns to drop from the resulting DataFrame.
+    keep_indexes (list or str, default=None): Indexes to keep in the resulting DataFrame.
+    drop_indexes (list or str, default=None): Indexes to drop from the resulting DataFrame.
+    drop_before_keep (bool, default=False): If True, drops specified columns/indexes before keeping.
+    print_analysis (bool, default=True): If True, prints an analysis of the regression results.
+
+    Returns:
+    pd.DataFrame: Summary of regression statistics for the FX rates and risk-free rate differentials.
+    """
+    raise Exception("Function not available - needs testing prior to use")
     fx_rates = fx_rates.copy()
     rf_rates = rf_rates.copy()
     if isinstance(base_rf_series, (pd.Series, pd.DataFrame)):
@@ -1931,8 +2038,31 @@ def calc_dynamic_carry_trade(
     drop_columns: Union[list, str] = None,
     keep_indexes: Union[list, str] = None,
     drop_indexes: Union[list, str] = None,
-    drop_before_keep: bool = False,
+    drop_before_keep: bool = False
 ):
+    """
+    Calculates the dynamic carry trade strategy based on FX rates and risk-free rate differentials.
+
+    Parameters:
+    fx_rates (pd.DataFrame): Time series of FX rates.
+    rf_rates (pd.DataFrame): Time series of risk-free rates.
+    transform_to_log_fx_rates (bool, default=True): If True, converts FX rates to log returns.
+    transform_to_log_rf_rates (bool, default=True): If True, converts risk-free rates to log returns.
+    rf_to_fx (dict, default=None): Mapping of risk-free rates to FX pairs.
+    base_rf (str, default=None): Base risk-free rate to use for calculations.
+    base_rf_series (pd.Series or pd.DataFrame, default=None): Time series of the base risk-free rate.
+    annual_factor (int or None, default=None): Factor for annualizing the returns.
+    return_premium_series (bool, default=False): If True, returns the premium series instead of summary statistics.
+    keep_columns (list or str, default=None): Columns to keep in the resulting DataFrame.
+    drop_columns (list or str, default=None): Columns to drop from the resulting DataFrame.
+    keep_indexes (list or str, default=None): Indexes to keep in the resulting DataFrame.
+    drop_indexes (list or str, default=None): Indexes to drop from the resulting DataFrame.
+    drop_before_keep (bool, default=False): If True, drops specified columns/indexes before keeping.
+
+    Returns:
+    pd.DataFrame: Summary of the carry trade strategy statistics or premium series.
+    """
+    raise Exception("Function not available - needs testing prior to use")
     if annual_factor is None:
         print("Regression assumes 'annual_factor' equals to 12 since it was not provided")
         annual_factor = 12

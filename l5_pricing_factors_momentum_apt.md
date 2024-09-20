@@ -1,4 +1,4 @@
-# 5. Pricing Factors
+# 5. Pricing Factors (Summary of notes)
 
 ## Time-Series Test of a Factor Model
 A pricing model works if the $\alpha$ is statistically insignificant.

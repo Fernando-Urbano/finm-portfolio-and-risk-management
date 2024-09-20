@@ -1,4 +1,4 @@
-# 4. CAPM
+# 4. CAPM (Summary of notes)
 The Capital Asset Pricing Model (CAPM) is a model that explains expected returns ($\mathbb{E}[r]$), where the expected excess return of any asset is proportional to the market $\beta$.
 
 Like other factor models, CAPM aims to answer the question: what is the mean expected return of any asset in the market?
