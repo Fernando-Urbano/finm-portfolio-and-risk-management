@@ -1,4 +1,7 @@
-*.pdf
+ppts
 *.csv
 *.xlsx
-contract/*
+*.pptx
+*.
+contract
+case-studies/*.pdf

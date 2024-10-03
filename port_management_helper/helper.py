@@ -765,7 +765,7 @@ def calc_tangency_weights(
         cov = returns.cov()
         covmat_diag = np.diag(np.diag((cov)))
         covmat = cov_mat * cov + (1 - cov_mat) * covmat_diag
-        cov_inv = np.linalg.inv((covmat * annual_factor))  
+        cov_inv = np.linalg.pinv((covmat * annual_factor))  
         
     ones = np.ones(returns.columns.shape) 
     mu = returns.mean() * annual_factor
