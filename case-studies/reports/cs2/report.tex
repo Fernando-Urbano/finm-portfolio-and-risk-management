@@ -1,0 +1,197 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% Setup the listings package
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\newcommand{\redbold}[1]{\textbf{\textcolor{red}{#1}}}
+
+\lstset{style=mystyle}
+
+\title{Some Takeaways - ProShares Hedge Replication ETF}
+\author{Fernando Urbano}
+\date{Autumn 2024}
+
+\begin{document}
+\maketitle
+
+\redbold{Attention: This is not the complete material.} The following are organized notes from the lecture with key takeaways. We highly recommend that you also study the PowerPoint slides and supplement your understanding with your own lecture notes.
+
+\section{Introduction}
+ProShares has extensive research and development behind its lineup of exchange-traded funds (ETFs).
+
+ProShares was a pioneer in packaging liquid alternative strategies into ETFs.
+
+The presentation by Joanne Hill focused on "Hedge Fund Replication: A Closer Look," specifically on one of ProShares' liquid alternative strategy products: the Hedge Fund Replication ETF (HDG).
+
+The Hedge Fund Replication ETF offered:
+\begin{itemize}
+    \item Transparency
+    \item Daily liquidity
+    \item Low fees
+\end{itemize}
+
+However, the audience was resistant to the product, as most hedge funds had underperformed the overall stock market in recent years:
+\begin{itemize}
+    \item HDG 2013 returns: 4.4\% with volatility of 4.8\%
+    \item S\&P 2013 returns: 32.4\% with volatility of 11\%
+\end{itemize}
+
+\section{ProShares}
+A leader in ETFs for shorting and leveraging positions, ProShares allowed investors to take hedging and speculative positions without directly using derivatives.
+
+During the 2008 financial crisis, challenges arose due to the fact that most ETFs reset daily. With high volatility and market stress, long-term investors saw returns deviate from the expected multiple of index returns over periods longer than a day, leading to problems and lawsuits.
+
+When market volatility normalized, ETFs regained popularity.
+
+From 2010 onwards, ProShares focused on creating alternative strategies. By the end of 2013, ProShares managed over \$33 billion in assets and more than 140 ETFs. Their offerings spanned Global Fixed Income, Hedge Strategies, Geared, and Inflation \& Volatility categories.
+
+\section{ProShares Hedge Replication ETF (HDG)}
+The primary objective of the Hedge Replication ETF was to give investors with a sizable portfolio exposure to hedge fund investments, as part of an allocation to alternatives, in order to improve risk-adjusted returns.
+
+Key arguments included:
+\begin{itemize}
+    \item Adjusting a 60-40 portfolio (60\% stocks and 40\% bonds) by reallocating 20\% of equity exposure into hedge funds could maintain the same average returns while decreasing hypothetical risk.
+    \item Investing \$10,000 in hedge funds from 1994 to 2013 would have yielded a 10\% higher return than stocks, and more than double the return of bonds.
+    \item Hedge funds provided a smoother ride than stocks in the past five years, though stocks ultimately performed better.
+\end{itemize}
+
+\subsection{HRFI (Hedge Fund Research Index)}
+The HRFI replicates hedge fund performance and offers:
+\begin{itemize}
+    \item Less than half the volatility of the S\&P.
+    \item Annualized returns less than 1\% lower than the S\&P.
+    \item Half the drawdown of equities during the 2008 crisis.
+\end{itemize}
+
+Investing in individual hedge funds was beneficial if the investor was willing to invest time in finding quality funds and had the patience to wait before withdrawing money.
+
+\subsection{Disadvantages of the Hedge Fund Market}
+The hedge fund market had several drawbacks:
+\begin{itemize}
+    \item Most hedge funds required substantial minimum investments, making them accessible only to large institutions and wealthy investors.
+    \item Many hedge funds had restrictive terms and notice periods regarding withdrawals.
+    \item Hedge funds often lacked transparency, as their strategies were largely proprietary.
+    \item Fees were significant: typically 2\% annually, plus a 20\% performance fee.
+    \item Hedge fund taxation often involved K-1 forms, complicating tax filings for some investors.
+\end{itemize}
+
+\subsection{HDG and Replication}
+HDG aimed to achieve a high correlation with hedge fund beta by tracking the Merrill Lynch Factor Model, which targeted a strong correlation to the HRFI.
+
+HDG sought to replicate the performance of the Merrill Lynch Factor Model.
+
+\section{Merrill Lynch Factor Model for Tracking HRFI}
+Merrill Lynch developed an index to replicate hedge fund performance without direct investment in hedge funds, aiming to mimic the HRFI.
+
+HRFI is the broadest index from Hedge Fund Research Inc., a global leader in the alternative investment industry.
+
+To replicate hedge fund risk and returns without directly investing, the model used regression analysis to assign weights to market factors that contributed to hedge fund performance.
+
+The original Merrill Lynch Factor Model included six factors:
+\begin{itemize}
+    \item S\&P 500
+    \item Russell 2000
+    \item MSCI EAFE (Developed Stock Markets)
+    \item MSCI Emerging Markets
+    \item Eurodollar/U.S. Dollar exchange rate
+    \item Three-month Eurodollar Deposit Yields
+\end{itemize}
+
+The model used a rolling regression of the previous 24 months of returns and allowed weights on the six factors, imposing certain constraints.
+
+However, some components of the index were unavailable in the market. To create a benchmark for HDG, adjustments were made:
+\begin{itemize}
+    \item MLFM-ES replaced the Three-month Eurodollar Deposit Yields.
+    \item UltraShort Euro (EUO) replaced the Eurodollar/U.S. Dollar exchange rate.
+\end{itemize}
+
+The Merrill Lynch Factor Model achieved a 90\% correlation with HRFI, and the Merrill Lynch Factor Model Exchange Series, which included the adjusted assets, had a correlation of 99.7\% with the original model.
+
+\section{Discussion: ProShares Hedge Replication ETF}
+\subsection{What Are Alternative ETFs?}
+Alternative ETFs hold alternative investments like REITs (real estate), crypto-assets, high-yield bonds (less liquid), commodities, and alternative strategies. These strategies may include algorithm-based approaches if they can be delivered at a low cost.
+
+Alternative ETFs can generally be defined as ETFs that:
+\begin{itemize}
+    \item Belong to alternative asset classes.
+    \item Are algorithm-based.
+    \item Have leverage or short positions on indexes.
+\end{itemize}
+
+\subsection{ETFs vs. Hedge Funds}
+\begin{itemize}
+    \item ETFs are generally more liquid than hedge funds and do not require waiting periods for withdrawals.
+    \item Hedge funds aim to generate $\alpha$ and outperform ETF benchmarks (whether they succeed is another story). As a result, hedge funds typically charge higher fees.
+    \item Hedge funds take a bottom-up approach (dealing with illiquid securities, high-yield bonds, etc.), aiming to generate $\alpha$, while ETFs take a broader, top-down approach, focusing on macro-level factors.
+\end{itemize}
+
+\subsection{What Are the Indexes Mentioned?}
+\begin{itemize}
+    \item \textbf{HFRI}: An index that aggregates hedge fund returns.
+    \item \textbf{MLFM}: The Merrill Lynch Factor Model, which statistically replicates the performance of the HFRI by analyzing key market factors.
+    \item \textbf{MLFM-ES}: A variation of the MLFM that uses tradable securities to replace non-marketable components.
+    \item \textbf{HDG}: Uses the MLFM-ES to replicate the HFRI.
+\end{itemize}
+
+\subsection{Concerns About MLFM Replicating HFRI}
+While the model achieves a high $R^2$, the replication involves multifactor regression, which could lead to high multicollinearity.
+
+Indeed, the factors in the model exhibit considerable correlation:
+\begin{itemize}
+    \item S\&P US Equity with EFA US Equity: 86\%
+    \item EFA US Equity with EEM US Equity: 84\%
+    \item EFA US Equity with IWM US Equity: 78\%
+    \item S\&P US Equity with IWM US Equity: 88\%
+\end{itemize}
+
+\subsection{Is HDG's Delivery of Beta a Problem?}
+HDG acts as a passive "hedge fund," aiming to provide access to $\beta$ rather than generate $\alpha$. Direct hedge fund investment would be significantly more expensive and involve liquidity challenges, high fees, and other issues.
+
+\subsection{Why Is HRFI So Different from the S\&P 500?}
+HRFI includes hedge funds that do not necessarily invest in equities, providing substantial diversification. Additionally, hedge funds that invest in equities often hedge risks they are less familiar with, leading to less exposure to unwanted risks.
+
+\subsection{How Well Does HDG Replicate HFRI?}
+HDG replicates HFRI reasonably well in terms of correlation (89\%), but there are differences in level, skewness, and kurtosis.
+
+While HFRI had better risk-adjusted returns compared to HDG, HDG exhibited less negative skewness (HFRI skewness: -0.98, HDG skewness: -0.24) and lower excess kurtosis (HFRI: 5.91, HDG: 1.78).
+
+Overall, HDG is a fair replication, given that it uses six factors to replicate a vast array of possible hedge fund investments.
+
+\end{document}
