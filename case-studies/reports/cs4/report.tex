@@ -1,0 +1,89 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% Setup the listings package
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\newcommand{\redbold}[1]{\textbf{\textcolor{red}{#1}}}
+
+\lstset{style=mystyle}
+
+\title{Some Takeaways - Dimensional Fund Advisors}
+\author{Fernando Urbano}
+\date{Autumn 2024}
+
+\begin{document}
+\maketitle
+
+\redbold{Attention: This is not the complete material.} The following are organized notes from the lecture with key takeaways. We highly recommend that you also study the PowerPoint slides and supplement your understanding with your own lecture notes.
+
+\section{Introduction}
+Dimensional Fund Advisors (DFA) demonstrated stellar performance after enduring some relatively rough periods in the late 1990s.
+
+Despite its strong performance, DFA was still ranked as the 96th largest hedge fund in the US at the time, indicating significant potential for further growth.
+
+\section{The Company}
+DFA was committed to the belief that the stock market is efficient: no one could consistently pick stocks that would outperform the market.
+
+Furthermore, DFA placed great emphasis on:
+\begin{itemize}
+    \item the value of sound academic research.
+    \item the ability of skilled traders to contribute to a fund's profits, even when the investment strategy was largely passive.
+\end{itemize}
+
+DFA often invested in small-cap stocks.
+
+The majority of DFA's clients were institutional investors. In 1989, DFA began exploring ways to expand its market by targeting high-net-worth individuals.
+
+\section{20 Years of Investing Based on Academic Research}
+A key reason DFA focused on small stocks was Rolf Banz's PhD dissertation, which demonstrated that small stocks outperformed the broader market for most of the period between 1926 and the 1970s.
+
+Moreover, DFA was deeply committed to minimizing transaction costs, including through the use of block trades and careful participation in the market.
+
+\section{Beyond the Size Effect}
+In 1992, Fama and French published "The Cross-section of Expected Stock Returns," which revealed:
+
+\begin{itemize}
+    \item Stocks with high beta did not consistently have higher returns than low-beta stocks.
+    \item Stocks with a high book-to-market ratio (BE/ME) consistently exhibited higher returns than stocks with a low BE/ME ratio.
+    \item Consistent with Banz's earlier findings, small-cap stocks outperformed large-cap stocks.
+    \item Fama suggested that these factors explained a significant portion of the common variation in stock returns, linking them to real economic risks.
+\end{itemize}
+
+\end{document}

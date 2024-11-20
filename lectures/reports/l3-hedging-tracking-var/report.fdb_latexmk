@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1728695758.32639 "/Users/fernandorochacorreaurbano/Desktop/portfolio-and-risk-management/finm-portfolio-and-risk-management/lectures/reports/l3-hedging-tracking-var/report.tex" "report.pdf" "report" 1728695759.10862 0
-  "/Users/fernandorochacorreaurbano/Desktop/portfolio-and-risk-management/finm-portfolio-and-risk-management/lectures/reports/l3-hedging-tracking-var/report.tex" 1728695757.27193 10659 6c16dca987e89b125d08f6cb061755ab ""
+["pdflatex"] 1728753703.60792 "/Users/fernandorochacorreaurbano/Desktop/portfolio-and-risk-management/finm-portfolio-and-risk-management/lectures/reports/l3-hedging-tracking-var/report.tex" "report.pdf" "report" 1728753704.20624 0
+  "/Users/fernandorochacorreaurbano/Desktop/portfolio-and-risk-management/finm-portfolio-and-risk-management/lectures/reports/l3-hedging-tracking-var/report.tex" 1728753702.82857 10659 6c16dca987e89b125d08f6cb061755ab ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -92,9 +92,9 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1726838998.69877 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1726838976 8221424 454b2c53fe337be275f410895c638726 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "report.aux" 1728695759.02814 2539 1502c060ce63ba86991257ba2719e9f9 "pdflatex"
-  "report.out" 1728695759.02891 3400 ce3b45a5ca117e2baaf2de2fade4c450 "pdflatex"
-  "report.tex" 1728695757.27193 10659 6c16dca987e89b125d08f6cb061755ab ""
+  "report.aux" 1728753704.14449 2539 1502c060ce63ba86991257ba2719e9f9 "pdflatex"
+  "report.out" 1728753704.14502 3400 ce3b45a5ca117e2baaf2de2fade4c450 "pdflatex"
+  "report.tex" 1728753702.82857 10659 6c16dca987e89b125d08f6cb061755ab ""
   (generated)
   "report.aux"
   "report.log"

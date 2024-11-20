@@ -1,0 +1,136 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section*{Derivation of Cross-Sectional $R^2 = 1$ for the Tangency Portfolio}
+
+The tangency portfolio maximizes the Sharpe ratio, and when we use it to form a single-factor model of expected returns, the $R^2$ of the cross-sectional regression of expected returns on betas is 100\%. Here’s the mathematical derivation.
+
+\subsection*{1. Time-Series Regression to Estimate Betas}
+
+For each asset $i$, we perform a time-series regression of its excess returns on the excess returns of the tangency portfolio p:
+\begin{equation}
+\tilde{r}_{i,t} = \alpha_i + \beta_i \tilde{r}_{p,t} + \epsilon_{i,t}
+\end{equation}
+where:
+
+\begin{itemize}
+\item $\tilde{r}{i,t}$ is the excess return of asset $i$ at time t,
+\item $\tilde{r}{p,t}$ is the excess return of the tangency portfolio at time t,
+\item $\beta_i$ is the estimated beta of asset $i$ with respect to the tangency portfolio,
+\item $\alpha_i$ is the intercept term,
+\item $\epsilon_{i,t}$ is the regression residual.
+\end{itemize}
+
+\subsection*{2. Analytical Formula for the Tangency Portfolio}
+
+The tangency portfolio weights, which maximize the Sharpe ratio, are given by:
+
+\begin{equation}
+\mathbf{w}_p = \frac{\boldsymbol{\Sigma}^{-1} \tilde{\mathbf{r}}}{\mathbf{1}’ \boldsymbol{\Sigma}^{-1} \tilde{\mathbf{r}}}
+\end{equation}
+
+where:
+
+\begin{itemize}
+
+\item $\mathbf{w}_p$ is the vector of weights in the tangency portfolio,
+\item \( \boldsymbol{\Sigma} \) is the covariance matrix of asset returns,
+\item $\tilde{\mathbf{r}}$is the vector of expected excess returns,
+\item $\mathbf{1}$ is a vector of ones.
+\end{itemize}
+
+Let’s denote the normalization constant by:
+\begin{equation}
+k = \frac{1}{\mathbf{1}’ \boldsymbol{\Sigma}^{-1} \tilde{\mathbf{r}}}
+\end{equation}
+Then, we can express the tangency portfolio weights as:
+\begin{equation}
+\mathbf{w}_p = k \boldsymbol{\Sigma}^{-1} \tilde{\mathbf{r}}
+\end{equation}
+
+\subsection*{3. Expected Excess Returns and Covariances}
+
+The covariance between asset $i$ and the tangency portfolio is:
+\begin{equation}
+\text{Cov}(\tilde{r}_i, \tilde{r}_p) = \mathbf{w}_p’ \boldsymbol{\sigma}_i
+\end{equation}
+where \( \boldsymbol{\sigma}_i \) is the i -th column of \( \boldsymbol{\Sigma} \).
+
+The variance of the tangency portfolio is:
+\begin{equation}
+\text{Var}(\tilde{r}_p) = \mathbf{w}_p’ \boldsymbol{\Sigma} \mathbf{w}_p
+\end{equation}
+
+\subsection*{4. Calculating Betas}
+
+The beta of asset $i$ with respect to the tangency portfolio is:
+\begin{equation}
+\beta_i = \frac{\text{Cov}(\tilde{r}_i, \tilde{r}_p)}{\text{Var}(\tilde{r}_p)} = \frac{\mathbf{w}_p’ \boldsymbol{\sigma}_i}{\mathbf{w}_p’ \boldsymbol{\Sigma} \mathbf{w}_p}
+\end{equation}
+
+\subsection*{5. Relationship Between Expected Returns and Betas}
+
+Using the tangency portfolio weights, we have:
+
+\begin{equation}
+\tilde{\mathbf{r}} = \frac{1}{k} \boldsymbol{\Sigma} \mathbf{w}_p
+\end{equation}
+
+For each asset i, we find:
+
+\begin{equation}
+E[\tilde{r}_i] = \frac{1}{k} (\boldsymbol{\Sigma} \mathbf{w}_p)_i = \frac{1}{k} \text{Cov}(\tilde{r}_i, \tilde{r}_p)
+\end{equation}
+
+Given that $\beta_i = \frac{\text{Cov}(\tilde{r}_i, \tilde{r}_p)}{\text{Var}(\tilde{r}_p)}$, we obtain:
+
+\begin{equation}
+E[\tilde{r}_i] = \left( \frac{1}{k} \text{Var}(\tilde{r}_p) \right) \beta_i
+\end{equation}
+
+Calculating k using the expected return and variance of the tangency portfolio:
+\begin{equation}
+E[\tilde{r}_p] = \mathbf{w}_p’ \tilde{\mathbf{r}} = \mathbf{w}_p’ \left( \frac{1}{k} \boldsymbol{\Sigma} \mathbf{w}_p \right) = \frac{1}{k} \text{Var}(\tilde{r}_p)
+\end{equation}
+Thus,
+\begin{equation}
+k = \frac{\text{Var}(\tilde{r}_p)}{E[\tilde{r}_p]}
+\end{equation}
+
+Substituting back, we find:
+\begin{equation}
+E[\tilde{r}_i] = E[\tilde{r}_p] \beta_i
+\end{equation}
+
+\subsection*{6. Cross-Sectional Regression and $R^2$ Calculation}
+
+The cross-sectional regression equation for expected returns is:
+\begin{equation}
+E[\tilde{r}_i] = \gamma_0 + \gamma_1 \beta_i + \varepsilon_i
+\end{equation}
+
+where:
+\begin{itemize}
+\item $\gamma_0 = 0$,
+\item $\gamma_1 = E[\tilde{r}_p]$,
+\item $\varepsilon_i = 0$.
+\end{itemize}
+
+Since $\varepsilon_i = 0$ for all i, the sum of squared residuals (SSR) is zero:
+
+\begin{equation}
+\text{SSR} = \sum_{i} \varepsilon_i^2 = 0
+\end{equation}
+
+The $R^2$ of the regression is then:
+\begin{equation}
+R^2 = 1 - \frac{\text{SSR}}{\text{SST}} = 1
+\end{equation}
+
+\section*{Conclusion}
+
+Thus, by performing the time-series regression to estimate betas and using the analytical formula for the tangency portfolio, we have shown that expected excess returns are perfectly explained by betas in the cross-sectional regression, resulting in an $R^2$ of 1.
+
+\end{document}

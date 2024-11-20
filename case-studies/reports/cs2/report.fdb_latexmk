@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1728696038.92202 "/Users/fernandorochacorreaurbano/Desktop/portfolio-and-risk-management/finm-portfolio-and-risk-management/case-studies/reports/cs2/report.tex" "report.pdf" "report" 1728696039.68697 0
-  "/Users/fernandorochacorreaurbano/Desktop/portfolio-and-risk-management/finm-portfolio-and-risk-management/case-studies/reports/cs2/report.tex" 1728696038.69112 10165 8c5fa6da45ac94b906856aa4f509cd95 ""
+["pdflatex"] 1728755028.08107 "/Users/fernandorochacorreaurbano/Desktop/portfolio-and-risk-management/finm-portfolio-and-risk-management/case-studies/reports/cs2/report.tex" "report.pdf" "report" 1728755028.65061 0
+  "/Users/fernandorochacorreaurbano/Desktop/portfolio-and-risk-management/finm-portfolio-and-risk-management/case-studies/reports/cs2/report.tex" 1728755027.84887 10165 8c5fa6da45ac94b906856aa4f509cd95 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -87,9 +87,9 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1726838998.69877 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1726838976 8221424 454b2c53fe337be275f410895c638726 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "report.aux" 1728696039.61849 2176 f0b5caf323d3509b75655485817ccfff "pdflatex"
-  "report.out" 1728696039.61935 3270 ad26bff2710e61a84390c5ae100e6d88 "pdflatex"
-  "report.tex" 1728696038.69112 10165 8c5fa6da45ac94b906856aa4f509cd95 ""
+  "report.aux" 1728755028.60119 2176 f0b5caf323d3509b75655485817ccfff "pdflatex"
+  "report.out" 1728755028.60162 3270 ad26bff2710e61a84390c5ae100e6d88 "pdflatex"
+  "report.tex" 1728755027.84887 10165 8c5fa6da45ac94b906856aa4f509cd95 ""
   (generated)
   "report.aux"
   "report.log"

@@ -1,0 +1,101 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+
+\begin{document}
+
+\section*{Tangency Factor Model: why we have \( R^2 = 1 \) In-Sample?}
+
+Remember that:
+
+\[
+\mathbf{w}_p = \frac{\Sigma^{-1} \boldsymbol{\mu}}{\mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu}}
+\]
+
+
+
+To understand why the cross-sectional regression of average asset returns on their betas yields an \( R^2 \) of 1 when the betas are obtained by regressing the assets on the tangency portfolio, we proceed as follows:
+
+\subsection*{1. The Tangency Portfolio and Asset Expected Returns}
+
+In mean-variance optimization, the tangency portfolio is the portfolio on the efficient frontier that offers the highest Sharpe ratio. Its weights are proportional to the inverse of the covariance matrix \( \Sigma \) multiplied by the vector of expected returns \( \boldsymbol{\mu} \):
+
+\[
+\mathbf{w}_p = \frac{\Sigma^{-1} \boldsymbol{\mu}}{\mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu}}
+\]
+
+where \( \mathbf{1} \) is a vector of ones.
+
+\subsection*{2. Covariance Between Assets and the Tangency Portfolio}
+
+The covariance between the return of asset \( i \) and the return of the tangency portfolio \( R_p \) is:
+
+\[
+\operatorname{Cov}(R_i, R_p) = \operatorname{Cov}\left(R_i, \mathbf{w}_p^\top \mathbf{R}\right) = \mathbf{w}_p^\top \operatorname{Cov}(R_i, \mathbf{R}) = \mathbf{w}_p^\top \Sigma_{\cdot i} = (\Sigma \mathbf{w}_p)_i
+\]
+
+Since \( \Sigma \mathbf{w}_p = \boldsymbol{\mu} \) (a property of the tangency portfolio), we have:
+
+\[
+\operatorname{Cov}(R_i, R_p) = \mu_i
+\]
+
+\subsection*{3. Beta of Asset \( i \) with Respect to the Tangency Portfolio}
+
+The beta of asset \( i \) with respect to the tangency portfolio is defined as:
+
+
+
+\[
+\beta_i = \frac{\operatorname{Cov}(R_i, R_p)}{\operatorname{Var}(R_p)} = \frac{\mu_i}{\sigma_p^2}
+\]
+
+where \( \sigma_p^2 = \operatorname{Var}(R_p) \).
+
+\subsection*{4. Linear Relationship Between Expected Returns and Betas}
+
+Rewriting the equation for \( \mu_i \):
+
+\[
+\mu_i = \beta_i \sigma_p^2
+\]
+
+This establishes a perfect linear relationship between the expected returns \( \mu_i \) and the betas \( \beta_i \).
+
+\subsection*{5. Cross-Sectional Regression}
+
+In the cross-sectional regression:
+
+\[
+\mu_i = a + b \beta_i + \varepsilon_i
+\]
+
+the perfect linear relationship \( \mu_i = \beta_i \sigma_p^2 \) implies:
+
+- \( a = 0 \)
+- \( b = \sigma_p^2 \)
+- \( \varepsilon_i = 0 \)
+
+\subsection*{6. Resulting \( R^2 \) of 1}
+
+Since there is no residual error (\( \varepsilon_i = 0 \)) in the regression model, all the variability in \( \mu_i \) is explained by \( \beta_i \). Therefore, the coefficient of determination is:
+
+\[
+R^2 = 1
+\]
+
+\subsection*{Conclusion}
+
+The perfect linear relationship between the expected returns and the betas (obtained from regressing asset returns on the tangency portfolio) ensures that the cross-sectional regression yields an \( R^2 \) of 1.
+
+\subsection*{Summary of Formula Derivation}
+
+\begin{align*}
+\operatorname{Cov}(R_i, R_p) &= \mu_i \\
+\beta_i &= \frac{\mu_i}{\sigma_p^2} \\
+\mu_i &= \beta_i \sigma_p^2 \\
+\mu_i &= 0 + \sigma_p^2 \beta_i + 0 \quad \text{(regression equation)}
+\end{align*}
+
+Thus, \( R^2 = 1 \) because \( \varepsilon_i = 0 \).
+
+\end{document}

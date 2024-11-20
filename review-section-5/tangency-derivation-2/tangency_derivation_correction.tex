@@ -1,0 +1,177 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+\usepackage{geometry}
+\usepackage{titlesec}
+
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% Setup the listings package
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\newcommand{\redbold}[1]{\textbf{\textcolor{red}{#1}}}
+
+\lstset{style=mystyle}
+
+\title{Some Takeaways - Tangency Portfolio Factor Model: Derivation of In-Sample \( R^2 = 1 \) in the Cross-Sectional Regression}
+\author{Fernando Urbano}
+\date{Autumn 2024}
+
+\begin{document}
+\maketitle
+
+When we use the tangency portfolio for a given set of assets as the factor model for the same assets, the tangency portfolio explains 100\% of the variability in the cross-section. Meaning that, in-sample, it is the perfect pricing model ($R^2 = 1$).
+
+Why is that the case?
+
+\section{Reminders}
+
+Weights in the tangency portfolio:
+
+\[
+\mathbf{w}_p = \frac{\Sigma^{-1} \boldsymbol{\mu}}{\mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu}}
+\]
+
+The denominator, \( \mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu} \), serves as a scaling factor to normalize the portfolio weights.
+
+The $\beta$ value in a regression with a single feature:
+
+$$
+\beta = \dfrac{\text{Cov}(y, x)}{\text{Var}(y)}
+$$
+
+In our case:
+
+$$
+\beta = \dfrac{\text{Cov}(r_i, r_p)}{\text{Var}(r_p)}
+$$
+
+Where:
+
+\begin{itemize}
+    \item $r_p$ is the time-series of returns of the tangency portfolio.
+    \item $r_p$ is the time-series of returns of the asset $i$.
+\end{itemize}
+
+\section{Covariance between $r_i$ and Tangency Portfolio}
+
+The covariance between the return of asset \( i \) and the tangency portfolio \( r_p \) is:
+\[
+\operatorname{Cov}(r_i, r_p) = \operatorname{Cov}\left(r_i, \mathbf{w}_p^\top \mathbf{r}\right) = \mathbf{w}_p^\top \operatorname{Cov}(r_i, \mathbf{r}) = \mathbf{w}_p^\top \Sigma_{\cdot i}
+\]
+
+where $\mathbf{w}_p^\top \Sigma_{\cdot i}$ represents the $i$ column of $\Sigma$ or the $i$ value of the vector $\mathbf{w}_p^\top \Sigma$.
+
+Since:
+
+\[
+\Sigma \mathbf{w}_p = \frac{\boldsymbol{\mu}}{\mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu}},
+\]
+
+we have:
+\[
+\operatorname{Cov}(r_i, r_p) = \frac{\mu_i}{\mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu}}.
+\]
+
+\section{Variance of the Tangency Portfolio}
+
+The variance of the tangency portfolio \( r_p \) is:
+\[
+\operatorname{Var}(r_p) = \mathbf{w}_p^\top \Sigma \mathbf{w}_p = \left( \frac{\Sigma^{-1} \boldsymbol{\mu}}{\mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu}} \right)^\top \Sigma \left( \frac{\Sigma^{-1} \boldsymbol{\mu}}{\mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu}} \right).
+\]
+
+Which simplifies to:
+
+\[
+\operatorname{Var}(r_p) = \frac{\boldsymbol{\mu}^\top \Sigma^{-1} \boldsymbol{\mu}}{\left( \mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu} \right)^2}.
+\]
+
+\section{Beta of $r_i$ to the Tangency Portfolio}
+The beta of asset \( i \) relative to the tangency portfolio is:
+
+\[
+\beta_i
+= \frac{\operatorname{Cov}(r_i, r_p)}{\operatorname{Var}(r_p)}
+= \dfrac{ \dfrac{\mu_i}{\mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu}} }{ \dfrac{\boldsymbol{\mu}^\top \Sigma^{-1} \boldsymbol{\mu}}{\left( \mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu} \right)^2} }
+\]
+
+Simplifying:
+\[
+\beta_i = \frac{\mu_i \cdot \mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu}}{\boldsymbol{\mu}^\top \Sigma^{-1} \boldsymbol{\mu}}.
+\]
+
+\section{Expected Returns as a Function of Beta}
+
+Rearranging the expression for \( \beta_i \), we find:
+
+\[
+\mu_i = \beta_i \cdot \frac{\boldsymbol{\mu}^\top \Sigma^{-1} \boldsymbol{\mu}}{\mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu}}.
+\]
+
+This shows a perfect linear relationship between \( \mu_i \) and \( \beta_i \), with the slope given by:
+
+\[
+\frac{\boldsymbol{\mu}^\top \Sigma^{-1} \boldsymbol{\mu}}{\mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu}}
+\]
+
+Thus, the relationship between the asset and its $\beta$, for any asset $i$, is given by this \textbf{same} slope.
+
+\section{Cross-Sectional Regression}
+When performing a cross-sectional regression:
+
+\[
+\mu_i = \eta + \lambda \beta_i + \nu_i
+\]
+
+From the relationship \( \mu_i = \beta_i \cdot \frac{\boldsymbol{\mu}^\top \Sigma^{-1} \boldsymbol{\mu}}{\mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu}} \), we find:
+
+\[
+\hat{\lambda} = \frac{\boldsymbol{\mu}^\top \Sigma^{-1} \boldsymbol{\mu}}{\mathbf{1}^\top \Sigma^{-1} \boldsymbol{\mu}}
+\]
+
+\[
+\hat{\eta} = 0
+\]
+
+Which connects perfectly all the $\mu_i$, leadind to $\nu_i = 0 \quad \forall \quad i$. Consequently:
+
+\[
+R^2 = 1.
+\]
+
+Thus, in-sample the tangency portfolio is the perfect factor pricing model.
+
+\end{document}

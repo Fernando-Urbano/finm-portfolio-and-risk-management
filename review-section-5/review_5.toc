@@ -1,0 +1,8 @@
+\beamer@sectionintoc {1}{Pricing Factors}{3}{0}{1}
+\beamer@sectionintoc {2}{Pricing Models vs LFD}{13}{0}{2}
+\beamer@sectionintoc {3}{Testing a Pricing Model}{21}{0}{3}
+\beamer@sectionintoc {4}{Other Important Points}{23}{0}{4}
+\beamer@sectionintoc {5}{AQR Value Spread}{24}{0}{5}
+\beamer@sectionintoc {6}{Midterm 1 Review}{26}{0}{6}
+\beamer@sectionintoc {7}{Unconditional vs Conditional Sorting}{27}{0}{7}
+\beamer@sectionintoc {8}{Homework 5}{28}{0}{8}
